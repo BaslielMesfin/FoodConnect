@@ -6,7 +6,8 @@ import { getTimeRemaining, getUrgencyLevel } from "@/lib/utils";
 import AutoRefresh from "@/components/shared/AutoRefresh";
 import PageWrapper from "@/components/shared/PageWrapper";
 import EmptyState from "@/components/shared/EmptyState";
-import { PackageX } from "lucide-react";
+import { PackageX, CheckCircle2 } from "lucide-react";
+import { claimDonation } from "@/app/actions/donation";
 
 // Make the dashboard dynamic so it always fetches fresh data on load
 export const dynamicRoute = "force-dynamic";
@@ -131,10 +132,44 @@ export default async function ShelterDashboard() {
                         </div>
                       </div>
 
-                    <button className="fc-btn-secondary" style={{ width: "100%", padding: "6px 0", fontSize: 13, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-                      View on Map <ArrowUpRight size={14} />
-                    </button>
-                  </div>
+                      <div style={{ display: "flex", gap: 10 }}>
+                        <form action={claimDonation.bind(null, donation.id)} style={{ flex: 1 }}>
+                          <button 
+                            type="submit"
+                            className="fc-btn-primary" 
+                            style={{ 
+                              width: "100%", 
+                              padding: "8px 0", 
+                              fontSize: 13, 
+                              display: "flex", 
+                              alignItems: "center", 
+                              justifyContent: "center", 
+                              gap: 6,
+                              height: 36
+                            }}
+                          >
+                            <CheckCircle2 size={14} /> Accept Item
+                          </button>
+                        </form>
+                        
+                        <button 
+                          className="fc-btn-outline" 
+                          style={{ 
+                            flex: 1, 
+                            padding: "8px 0", 
+                            fontSize: 13, 
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "center", 
+                            gap: 6,
+                            height: 36,
+                            background: "white"
+                          }}
+                        >
+                          View on Map <ArrowUpRight size={14} />
+                        </button>
+                      </div>
+                    </div>
                 )
               })
             )}
