@@ -74,7 +74,8 @@ export default function RegisterPage() {
   };
 
   const handleGoogleSignIn = () => {
-    signIn("google", { callbackUrl: "/donor" });
+    const callbackUrl = role === "DONOR" ? "/donor" : "/shelter";
+    signIn("google", { callbackUrl });
   };
 
   return (
