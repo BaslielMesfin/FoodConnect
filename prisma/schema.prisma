@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ──────────────────────────────────────────────
+// Auth.js (NextAuth) required models
+// ──────────────────────────────────────────────
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ──────────────────────────────────────────────
+// Application models
+// ──────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          Role      @default(DONOR)
+  phone         String?
+  organization  String?
+  address       String?
+  lat           Float?
+  lng           Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  donatedItems  Donation[] @relation("DonorDonations")
+  receivedItems Donation[] @relation("ShelterDonations")
+}
+
+model Donation {
+  id              String         @id @default(cuid())
+  foodDescription String
+  weightKg        Float
+  expiresAt       DateTime
+  status          DonationStatus @default(PENDING)
+  pickupNotes     String?        @db.Text
+  priority        Priority       @default(STANDARD)
+
+  verificationPin String
+  magicLinkToken  String?        @unique
+  magicLinkExpiry DateTime?
+
+  donorId     String
+  donor       User   @relation("DonorDonations", fields: [donorId], references: [id], onDelete: Cascade)
+
+  shelterId   String?
+  shelter     User?  @relation("ShelterDonations", fields: [shelterId], references: [id], onDelete: Cascade)
+
+  claimedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status])
+  @@index([donorId])
+  @@index([shelterId])
+  @@index([expiresAt])
+}
+
+enum Role {
+  DONOR
+  SHELTER
+}
+
+enum DonationStatus {
+  PENDING
+  CLAIMED
+  IN_TRANSIT
+  COMPLETED
+  EXPIRED
+  CANCELLED
+}
+
+enum Priority {
+  STANDARD
+  URGENT
+}
