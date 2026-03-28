@@ -8,6 +8,9 @@ import bcrypt from "bcryptjs";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
+  trustHost: true,
+  secret: process.env.AUTH_SECRET,
+  debug: true, // Temporarily enable to catch production errors in Vercel logs
   pages: {
     signIn: "/login",
   },
