@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FoodConnect
+
+A real-time food rescue logistics platform that connects surplus food donors — restaurants, hotels, and caterers — with shelters and community kitchens in need. Built to tackle food waste and hunger simultaneously.
+
+## Features
+
+### Donor Portal
+- **Surplus Posting** — Post available food with category, weight, expiry, and pickup window
+- **Active Pickups** — Track claimed donations with real-time status updates
+- **History** — Full archive of past donations with status indicators
+- **Analytics** — Visual breakdowns of donation trends, categories, and impact metrics
+
+### Shelter Portal
+- **Live Discovery Map** — Interactive Leaflet map showing all available donations nearby
+- **One-Click Claiming** — Claim donations directly from the map or feed
+- **Dispatch Panel** — Manage active pickups and mark completions
+- **Partner Directory** — View all donors you've received food from with aggregated stats
+- **Analytics** — Intake trends, category distribution, and donor diversity metrics
+
+### Driver Hand-off System
+- **Unique Pickup Links** — Each donation generates a shareable driver link
+- **PIN Verification** — 4-digit PIN system for secure food handoffs
+- **No Login Required** — Drivers access their pickup view without authentication
+- **Live Status Polling** — Automatic status refresh without page reloads
+
+### Account & Settings
+- **Google OAuth** — One-click sign-in via Google
+- **Email/Password** — Traditional registration with role selection (Donor/Shelter)
+- **Profile Management** — Update organization name, phone, and address
+- **Responsive Layout** — Full mobile support with collapsible sidebar
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 + CSS Custom Properties |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | Auth.js (NextAuth v5) |
+| Maps | Leaflet + React-Leaflet |
+| Charts | Recharts |
+| Animations | Framer Motion |
+| Icons | Lucide React |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database (local or hosted via [Neon](https://neon.tech), [Supabase](https://supabase.com), or [Railway](https://railway.app))
+- Google OAuth credentials from [Google Cloud Console](https://console.cloud.google.com)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/BaslielMesfin/FoodConnect.git
+cd FoodConnect
+
+# Install dependencies
+npm install
+
+# Generate Prisma client
+npx prisma generate
+
+# Push database schema
+npx prisma db push
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+DATABASE_URL="postgresql://user:password@host:5432/foodconnect"
+AUTH_SECRET="your-random-secret-key"
+AUTH_URL="http://localhost:3000"
+AUTH_GOOGLE_ID="your-google-client-id"
+AUTH_GOOGLE_SECRET="your-google-client-secret"
+```
+
+### Running Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── actions/          # Server actions (donation, driver, user)
+│   ├── api/              # API routes (auth, registration)
+│   ├── donor/            # Donor portal pages
+│   ├── shelter/          # Shelter portal pages
+│   ├── settings/         # Account settings
+│   ├── pickup/[token]/   # Driver hand-off view
+│   ├── login/            # Login page
+│   └── register/         # Registration page
+├── components/
+│   ├── donor/            # Donor-specific components
+│   ├── shelter/          # Shelter-specific components
+│   ├── layout/           # Dashboard layout with sidebar
+│   ├── providers/        # Auth session provider
+│   └── shared/           # Reusable UI components
+├── lib/                  # Auth config, Prisma client, utilities
+└── types/                # TypeScript type extensions
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is optimized for [Vercel](https://vercel.com). Import the GitHub repository, add your environment variables, and deploy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
