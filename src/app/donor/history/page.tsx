@@ -69,7 +69,7 @@ export default async function DonorHistoryPage() {
               </tr>
             </thead>
             <tbody>
-              {donations.map((donation) => (
+              {donations.map((donation: any) => (
                 <tr key={donation.id} style={{ borderBottom: "1px solid var(--fc-border-light)", transition: "background 0.2s" }} className="hover:bg-[var(--fc-surface-hover)]">
                   <td style={{ padding: "16px 20px" }}>
                     {new Intl.DateTimeFormat("en-US", {
