@@ -65,7 +65,7 @@ export default async function DonorDashboard() {
   });
 
   // Calculate some stats (just examples based on active data for now)
-  const totalWeight = activeDonations.reduce((acc, d) => acc + d.weightKg, 0);
+  const totalWeight = activeDonations.reduce((acc: number, d: any) => acc + d.weightKg, 0);
 
   return (
     <PageWrapper>
@@ -137,7 +137,7 @@ export default async function DonorDashboard() {
         />
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 20 }}>
-          {activeDonations.map((donation) => {
+          {activeDonations.map((donation: any) => {
             const urgency = getUrgencyLevel(donation.expiresAt);
             const { expired, hours, minutes } = getTimeRemaining(donation.expiresAt);
             

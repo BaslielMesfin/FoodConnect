@@ -130,7 +130,7 @@ export default function LoginPage() {
               { value: "24,960", label: "Meals Served" },
               { value: "142", label: "Partners" },
               { value: "98.2%", label: "Success Rate" },
-            ].map((s) => (
+            ].map((s: any) => (
               <div
                 key={s.label}
                 style={{

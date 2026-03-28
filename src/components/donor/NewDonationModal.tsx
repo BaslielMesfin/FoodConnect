@@ -135,7 +135,7 @@ export default function NewDonationModal() {
                 required
               />
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
-                {commonFoodTypes.map((type) => (
+                {commonFoodTypes.map((type: any) => (
                   <button
                     key={type}
                     type="button"

@@ -409,7 +409,7 @@ export default function LandingPage() {
               icon: Clock,
               color: "#7C3AED",
             },
-          ].map((stat) => (
+          ].map((stat: any) => (
             <div
               key={stat.label}
               className="fc-card"

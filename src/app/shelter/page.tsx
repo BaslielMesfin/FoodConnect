@@ -15,7 +15,7 @@ import MapWrapper from "@/components/shelter/MapWrapper";
 
 // Helper to generate a consistent dummy coordinate for a given string ID around Addis Ababa
 function getDummyCoordinate(seed: string): { lat: number, lng: number } {
-  const hash = seed.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const hash = seed.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
   const latOffset = (hash % 100) / 1000 - 0.05; // Random number between -0.05 and +0.05
   const lngOffset = (hash % 50) / 1000 - 0.025; // Random number between -0.025 and +0.025
   return {
@@ -43,7 +43,7 @@ export default async function ShelterDashboard() {
   });
 
   // Map dummy coordinates to the donations 
-  const mappedDonations = availableDonations.map(donation => ({
+  const mappedDonations = availableDonations.map((donation: any) => ({
     ...donation,
     ...getDummyCoordinate(donation.id)
   }));

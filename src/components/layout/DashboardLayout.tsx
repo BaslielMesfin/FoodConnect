@@ -134,7 +134,7 @@ export default function DashboardLayout({
 
         {/* Nav Links */}
         <nav style={{ flex: 1, padding: "8px 12px" }}>
-          {links.map((link) => {
+          {links.map((link: any) => {
             const isActive = pathname === link.href;
             return (
               <Link

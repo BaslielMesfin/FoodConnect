@@ -69,7 +69,7 @@ export default async function ShelterDispatchPage() {
         </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))", gap: 24 }}>
-          {activeDispatch.map((donation) => {
+          {activeDispatch.map((donation: any) => {
             const { expired, hours, minutes } = getTimeRemaining(donation.expiresAt);
 
             return (

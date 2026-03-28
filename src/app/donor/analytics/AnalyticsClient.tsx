@@ -9,7 +9,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
   const monthlyData = useMemo(() => {
     // This is a naive grouping by month for demonstration since dates are usually scattered
     // For a real app, we'd group by day of the last 30 days
-    const days = Array.from({ length: 14 }).map((_, i) => {
+    const days = Array.from({ length: 14 }).map((_: any, i: number) => {
       const d = new Date();
       d.setDate(d.getDate() - (13 - i));
       return {
@@ -36,7 +36,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
     return days;
   }, [donations]);
 
-  const totalKg = donations.reduce((acc, current) => acc + current.weightKg, 0);
+  const totalKg = donations.reduce((acc: number, current: any) => acc + current.weightKg, 0);
   const totalMeals = Math.floor(totalKg * 2);
 
   return (
@@ -68,7 +68,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
             <h3 style={{ fontSize: 13, textTransform: "uppercase", fontWeight: 600, letterSpacing: "0.05em", margin: 0 }}>Active Days</h3>
           </div>
           <div style={{ fontSize: 36, fontWeight: 800, fontFamily: "var(--fc-font-heading)" }}>
-            {new Set(donations.map(d => new Date(d.createdAt).toDateString())).size} <span style={{ fontSize: 18, color: "var(--fc-text-secondary)", fontWeight: 500 }}>Days</span>
+            {new Set(donations.map((d: any) => new Date(d.createdAt).toDateString())).size} <span style={{ fontSize: 18, color: "var(--fc-text-secondary)", fontWeight: 500 }}>Days</span>
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export default function LiveMap({ donations }: MapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {donations.map((donation) => {
+        {donations.map((donation: any) => {
           const hoursLeft = (new Date(donation.expiresAt).getTime() - Date.now()) / (1000 * 60 * 60);
           const icon = hoursLeft < 2 ? urgentIcon : defaultIcon;
 

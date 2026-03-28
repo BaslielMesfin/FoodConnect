@@ -6,7 +6,7 @@ import { Heart, Truck, Users } from "lucide-react";
 
 export default function AnalyticsClient({ donations }: { donations: any[] }) {
   const monthlyData = useMemo(() => {
-    const days = Array.from({ length: 14 }).map((_, i) => {
+    const days = Array.from({ length: 14 }).map((_: any, i: number) => {
       const d = new Date();
       d.setDate(d.getDate() - (13 - i));
       return {
@@ -32,9 +32,9 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
     return days;
   }, [donations]);
 
-  const totalKg = donations.reduce((acc, current) => acc + current.weightKg, 0);
+  const totalKg = donations.reduce((acc: number, current: any) => acc + current.weightKg, 0);
   const totalMeals = Math.floor(totalKg * 2);
-  const uniquePartners = new Set(donations.map(d => d.donorId)).size;
+  const uniquePartners = new Set(donations.map((d: any) => d.donorId)).size;
 
   return (
     <div>

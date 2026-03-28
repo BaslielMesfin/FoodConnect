@@ -158,7 +158,7 @@ export default function RegisterPage() {
               "Real-time notifications for nearby shelters",
               "PIN-verified handoffs for safety",
               "Track your community impact over time",
-            ].map((item) => (
+            ].map((item: any) => (
               <div
                 key={item}
                 style={{
@@ -265,7 +265,7 @@ export default function RegisterPage() {
                     title: "I'm a Shelter",
                     desc: "Community shelter, food bank, or non-profit receiving donations",
                   },
-                ].map((opt) => (
+                ].map((opt: any) => (
                   <button
                     key={opt.value}
                     type="button"
