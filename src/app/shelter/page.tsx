@@ -104,7 +104,7 @@ export default async function ShelterDashboard() {
                 description="We will notify you when a donor posts an item."
               />
             ) : (
-              mappedDonations.map((donation) => {
+              mappedDonations.map((donation: any) => {
                 const urgency = getUrgencyLevel(donation.expiresAt);
                 const { hours, minutes } = getTimeRemaining(donation.expiresAt);
 

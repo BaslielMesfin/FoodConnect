@@ -20,14 +20,14 @@ export default async function PartnersPage() {
 
   // Extract unique donors using a Map
   const donorMap = new Map();
-  receivedDonations.forEach(donation => {
+  receivedDonations.forEach((donation: any) => {
     if (donation.donor && !donorMap.has(donation.donor.id)) {
       donorMap.set(donation.donor.id, {
         ...donation.donor,
-        totalDonations: receivedDonations.filter(d => d.donorId === donation.donor.id).length,
+        totalDonations: receivedDonations.filter((d: any) => d.donorId === donation.donor.id).length,
         totalKg: receivedDonations
-          .filter(d => d.donorId === donation.donor.id)
-          .reduce((sum, d) => sum + d.weightKg, 0)
+          .filter((d: any) => d.donorId === donation.donor.id)
+          .reduce((sum: number, d: any) => sum + d.weightKg, 0)
       });
     }
   });
@@ -66,7 +66,7 @@ export default async function PartnersPage() {
         />
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 20 }}>
-          {partners.map(partner => (
+          {partners.map((partner: any) => (
             <div key={partner.id} className="fc-card" style={{ display: "flex", flexDirection: "column", padding: 24, borderTop: "4px solid var(--fc-primary)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
                 <div style={{ width: 48, height: 48, borderRadius: "var(--fc-radius-md)", background: "var(--fc-primary-light)", color: "var(--fc-primary)", fontSize: 20, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>

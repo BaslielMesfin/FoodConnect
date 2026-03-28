@@ -17,7 +17,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
       };
     });
 
-    donations.forEach(don => {
+    donations.forEach((don: any) => {
       const dateStr = new Date(don.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
       const dayRaw = days.find(d => d.date === dateStr);
       if (dayRaw) {
@@ -25,7 +25,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
       }
     });
 
-    days.forEach(d => {
+    days.forEach((d: any) => {
       d.meals = Math.floor(d.kg * 2);
     });
     
