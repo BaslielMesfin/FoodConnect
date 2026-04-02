@@ -27,10 +27,10 @@ export default function NewDonationModal() {
   const [pickupNotes, setPickupNotes] = useState("");
 
   useEffect(() => {
-    // Set default expiration to 2 hours from now
+    // Set default expiration to 24 hours from now
     if (isOpen && !expiresAt) {
       const date = new Date();
-      date.setHours(date.getHours() + 2);
+      date.setHours(date.getHours() + 24);
       // Format to YYYY-MM-DDThh:mm for datetime-local
       setExpiresAt(new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16));
     }
@@ -184,9 +184,9 @@ export default function NewDonationModal() {
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
                 <Clock size={14} color="var(--fc-text-muted)" />
                 <span style={{ fontSize: 12, color: "var(--fc-text-secondary)" }}>Quick set:</span>
-                <button type="button" onClick={() => handleQuickAdd(1)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+1 hr</button>
-                <button type="button" onClick={() => handleQuickAdd(2)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+2 hrs</button>
-                <button type="button" onClick={() => handleQuickAdd(4)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+4 hrs</button>
+                <button type="button" onClick={() => handleQuickAdd(4)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+4h</button>
+                <button type="button" onClick={() => handleQuickAdd(12)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+12h</button>
+                <button type="button" onClick={() => handleQuickAdd(24)} style={{ fontSize: 12, color: "var(--fc-primary)", cursor: "pointer", background: "none", border: "none", fontWeight: 500 }}>+24h</button>
               </div>
             </div>
 

@@ -84,9 +84,10 @@ export async function cancelDonation(donationId: string) {
 
     revalidatePath("/donor");
     revalidatePath("/shelter");
-
+    return { success: true };
   } catch (error) {
     console.error("Failed to cancel donation:", error);
+    return { error: "Failed to cancel donation." };
   }
 }
 
