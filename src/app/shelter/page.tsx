@@ -58,7 +58,7 @@ export default async function ShelterDashboard() {
             <div style={{ width: 12, height: 2, background: "var(--fc-primary)" }} />
             Discovery Network
           </div>
-          <h1 style={{ fontSize: 32, fontFamily: "var(--fc-font-heading)", fontWeight: 800, letterSpacing: "-0.03em" }}>
+          <h1 style={{ fontSize: 28, fontFamily: "var(--fc-font-heading)", fontWeight: 700, letterSpacing: "-0.03em" }}>
             Surplus Food Tracking
           </h1>
         </div>
@@ -91,9 +91,9 @@ export default async function ShelterDashboard() {
           }}
         >
           <div style={{ padding: "18px 20px", borderBottom: "1px solid var(--fc-border-light)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--fc-bg)" }}>
-            <h2 style={{ fontSize: 15, fontFamily: "var(--fc-font-heading)", fontWeight: 800, display: "flex", alignItems: "center", gap: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+            <h2 style={{ fontSize: 14, fontFamily: "var(--fc-font-heading)", fontWeight: 700, display: "flex", alignItems: "center", gap: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>
               Available Today
-              <span style={{ fontSize: 12, padding: "2px 10px", background: "var(--fc-primary)", color: "white", borderRadius: "var(--fc-radius-full)", fontWeight: 700 }}>{mappedDonations.length}</span>
+              <span style={{ fontSize: 11, padding: "2px 10px", background: "var(--fc-primary)", color: "white", borderRadius: "var(--fc-radius-full)", fontWeight: 700 }}>{mappedDonations.length}</span>
             </h2>
           </div>
           
@@ -118,7 +118,7 @@ export default async function ShelterDashboard() {
                       overflow: "hidden"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-                        <h3 style={{ fontSize: 15, fontWeight: 700, fontFamily: "var(--fc-font-heading)", margin: 0 }}>{donation.foodDescription}</h3>
+                        <h3 style={{ fontSize: 15, fontWeight: 600, fontFamily: "var(--fc-font-heading)", margin: 0 }}>{donation.foodDescription}</h3>
                         <div style={{ fontSize: 12, fontWeight: 700, color: "var(--fc-text-secondary)", display: "flex", alignItems: "center", gap: 4 }}>
                           <MapPin size={12} color="var(--fc-primary)" />
                           Est. 2km

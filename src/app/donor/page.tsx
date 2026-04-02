@@ -25,7 +25,7 @@ function StatCard({
   return (
     <div className="fc-card hover-lift hover-glow animate-fade-in" style={{ padding: "24px", borderTop: `4px solid ${color}` }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-        <span style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--fc-text-secondary)" }}>
+        <span style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--fc-text-secondary)" }}>
           {label}
         </span>
         <div style={{ width: 32, height: 32, borderRadius: "var(--fc-radius-sm)", background: `${color}15`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -34,8 +34,8 @@ function StatCard({
       </div>
       <div
         style={{
-          fontSize: 36,
-          fontWeight: 800,
+          fontSize: 32,
+          fontWeight: 700,
           fontFamily: "var(--fc-font-heading)",
           color: "var(--fc-text)",
           letterSpacing: "-0.03em",
@@ -78,7 +78,7 @@ export default async function DonorDashboard() {
           <div style={{ width: 12, height: 2, background: "var(--fc-primary)" }} />
           Live Operations
         </div>
-        <h1 style={{ fontSize: 32, fontFamily: "var(--fc-font-heading)", fontWeight: 800, letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontSize: 28, fontFamily: "var(--fc-font-heading)", fontWeight: 700, letterSpacing: "-0.03em" }}>
           Operational Insight
         </h1>
       </div>
@@ -123,7 +123,7 @@ export default async function DonorDashboard() {
       </div>
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }} className="animate-fade-in">
-        <h2 style={{ fontSize: 22, fontFamily: "var(--fc-font-heading)", fontWeight: 800, display: "flex", alignItems: "center", gap: 12, letterSpacing: "-0.02em" }}>
+        <h2 style={{ fontSize: 21, fontFamily: "var(--fc-font-heading)", fontWeight: 700, display: "flex", alignItems: "center", gap: 12, letterSpacing: "-0.02em" }}>
           <Truck size={22} color="var(--fc-primary)" />
           Active Pickup Queue
         </h2>
