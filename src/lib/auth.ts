@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -18,6 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      allowDangerousEmailAccountLinking: true,
       profile(profile) {
         return {
           id: profile.sub,
@@ -61,6 +63,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          const cookieStore = await cookies();
+          const intendedRole = cookieStore.get("intended_role")?.value;
+          
+          if (intendedRole === "SHELTER" || intendedRole === "DONOR") {
+            // Forcefully update the user role in the DB to what was requested 
+            // during the register flow right before they clicked "Sign up with Google".
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { role: intendedRole as "DONOR" | "SHELTER" },
+            });
+          }
+        } catch (e) {
+          console.error("Error checking intended role from cookie", e);
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.role = (user as { role?: string }).role;

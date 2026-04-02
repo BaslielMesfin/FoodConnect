@@ -74,6 +74,7 @@ export default function RegisterPage() {
   };
 
   const handleGoogleSignIn = () => {
+    document.cookie = `intended_role=${role}; path=/; max-age=3600;`;
     const callbackUrl = role === "DONOR" ? "/donor" : "/shelter";
     signIn("google", { callbackUrl });
   };
