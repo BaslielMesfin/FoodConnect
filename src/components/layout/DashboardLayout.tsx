@@ -85,7 +85,7 @@ export default function DashboardLayout({
             justifyContent: "space-between",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
             <div
               style={{
                 width: 32,
@@ -115,7 +115,7 @@ export default function DashboardLayout({
                 {roleLabel} Portal
               </div>
             </div>
-          </div>
+          </Link>
           <button
             onClick={() => setSidebarOpen(false)}
             className="show-mobile-inline"

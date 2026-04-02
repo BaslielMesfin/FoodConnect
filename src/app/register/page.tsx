@@ -142,61 +142,6 @@ export default function RegisterPage() {
             Join a growing network of food donors and shelters working together to eliminate food waste.
           </p>
 
-          <div
-            style={{
-              marginTop: 48,
-              padding: 24,
-              background: "rgba(255,255,255,0.05)",
-              borderRadius: "var(--fc-radius-md)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              textAlign: "left",
-            }}
-          >
-            <div style={{ fontSize: 14, color: "rgba(255,255,255,0.8)", fontWeight: 600, marginBottom: 16 }}>
-              Why join FoodConnect?
-            </div>
-            {[
-              "Post surplus food in under 30 seconds",
-              "Real-time notifications for nearby shelters",
-              "PIN-verified handoffs for safety",
-              "Track your community impact over time",
-            ].map((item: any) => (
-              <div
-                key={item}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 12,
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.5)",
-                }}
-              >
-                <div
-                  style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: "50%",
-                    background: "rgba(0,200,83,0.2)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      background: "var(--fc-primary)",
-                    }}
-                  />
-                </div>
-                {item}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

@@ -117,45 +117,6 @@ export default function LoginPage() {
             Rescue surplus food and deliver it to communities that need it most. Every meal matters.
           </p>
 
-          <div
-            style={{
-              marginTop: 48,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 16,
-            }}
-          >
-            {[
-              { value: "12,480", label: "KG Rescued" },
-              { value: "24,960", label: "Meals Served" },
-              { value: "142", label: "Partners" },
-              { value: "98.2%", label: "Success Rate" },
-            ].map((s: any) => (
-              <div
-                key={s.label}
-                style={{
-                  padding: "16px",
-                  background: "rgba(255,255,255,0.05)",
-                  borderRadius: "var(--fc-radius-sm)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 800,
-                    fontFamily: "var(--fc-font-heading)",
-                    color: "var(--fc-primary)",
-                  }}
-                >
-                  {s.value}
-                </div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 2 }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
