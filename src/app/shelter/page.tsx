@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { MapPin, Info, ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import { getTimeRemaining, getUrgencyLevel } from "@/lib/utils";
+import { getUrgencyColor, getTimeRemaining, getUrgencyLevel } from "@/lib/utils";
 import AutoRefresh from "@/components/shared/AutoRefresh";
 import PageWrapper from "@/components/shared/PageWrapper";
 import EmptyState from "@/components/shared/EmptyState";
@@ -106,7 +106,7 @@ export default async function ShelterDashboard() {
               />
             ) : (
               mappedDonations.map((donation: any) => {
-                const urgency = getUrgencyLevel(donation.expiresAt);
+                const urgencyColor = getUrgencyColor(donation.expiresAt);
                 const { hours, minutes } = getTimeRemaining(donation.expiresAt);
 
                 return (
@@ -115,7 +115,9 @@ export default async function ShelterDashboard() {
                       border: "1px solid var(--fc-border)", 
                       borderRadius: "var(--fc-radius-sm)", 
                       background: "var(--fc-bg)",
-                      borderLeft: `4px solid var(--fc-${urgency === 'red' ? 'danger' : urgency === 'yellow' ? 'warning' : 'primary'})`
+                      borderTop: `4px solid ${urgencyColor}`,
+                      position: "relative",
+                      overflow: "hidden"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                         <h3 style={{ fontSize: 16, fontFamily: "var(--fc-font-body)", margin: 0 }}>{donation.foodDescription}</h3>
@@ -127,30 +129,13 @@ export default async function ShelterDashboard() {
                       
                       <div style={{ display: "flex", gap: 16, fontSize: 13, color: "var(--fc-text-secondary)", marginBottom: 12 }}>
                         <div><strong>Weight:</strong> {donation.weightKg} KG</div>
-                        <div style={{ color: urgency === 'red' ? "var(--fc-danger)" : "inherit" }}>
+                        <div style={{ color: hours < 1 ? "var(--fc-danger)" : "inherit" }}>
                           <strong>Expires:</strong> {hours}h {minutes}m
                         </div>
                       </div>
 
                       <div style={{ display: "flex", gap: 10 }}>
                         <ClaimButton donationId={donation.id} />
-                        
-                        <button 
-                          className="fc-btn-outline" 
-                          style={{ 
-                            flex: 1, 
-                            padding: "8px 0", 
-                            fontSize: 13, 
-                            display: "flex", 
-                            alignItems: "center", 
-                            justifyContent: "center", 
-                            gap: 6,
-                            height: 36,
-                            background: "white"
-                          }}
-                        >
-                          View on Map <ArrowUpRight size={14} />
-                        </button>
                       </div>
                     </div>
                 )

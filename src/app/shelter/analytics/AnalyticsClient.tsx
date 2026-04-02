@@ -11,7 +11,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
       d.setDate(d.getDate() - (13 - i));
       return {
         date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-        kg: Math.floor(Math.random() * 40) + 20, 
+        kg: 0, 
         meals: 0,
         realDate: d
       };

@@ -31,11 +31,21 @@ export function getTimeRemaining(expiresAt: Date): {
   };
 }
 
+export function getUrgencyColor(expiresAt: Date): string {
+  const { total } = getTimeRemaining(expiresAt);
+  const maxTime = 24 * 60 * 60 * 1000; // 24 hours in ms
+  const percentage = Math.min(1, total / maxTime);
+  
+  // HSL: 120 is green, 0 is red
+  const hue = percentage * 120;
+  return `hsl(${hue}, 80%, 45%)`;
+}
+
 export function getUrgencyLevel(expiresAt: Date): "green" | "yellow" | "red" {
   const { total } = getTimeRemaining(expiresAt);
   const hoursLeft = total / (1000 * 60 * 60);
-  if (hoursLeft > 4) return "green";
-  if (hoursLeft > 1) return "yellow";
+  if (hoursLeft > 12) return "green";
+  if (hoursLeft > 4) return "yellow";
   return "red";
 }
 

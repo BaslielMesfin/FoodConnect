@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Truck, Navigation, Phone, MapPin, Key, MessageSquare } from "lucide-react";
-import { getTimeRemaining } from "@/lib/utils";
+import { Truck, Navigation, Phone, MapPin, Key, MessageSquare, Clock } from "lucide-react";
+import { getTimeRemaining, getUrgencyColor } from "@/lib/utils";
 import DispatchCardActions from "@/components/shelter/DispatchCardActions";
 import AutoRefresh from "@/components/shared/AutoRefresh";
 
@@ -70,18 +70,20 @@ export default async function ShelterDispatchPage() {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))", gap: 24 }}>
           {activeDispatch.map((donation: any) => {
+            const urgencyColor = getUrgencyColor(donation.expiresAt);
             const { expired, hours, minutes } = getTimeRemaining(donation.expiresAt);
 
             return (
-              <div key={donation.id} className="fc-card" style={{ display: "flex", flexDirection: "column" }}>
+              <div key={donation.id} className="fc-card" style={{ display: "flex", flexDirection: "column", borderTop: `4px solid ${urgencyColor}` }}>
                 {/* Header Phase */}
                 <div style={{ padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--fc-border-light)", background: "var(--fc-primary-light)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--fc-primary-dark)", fontWeight: 600, fontSize: 13 }}>
                     <div style={{ width: 8, height: 8, background: "var(--fc-primary)", borderRadius: "50%", animation: "pulse 2s infinite" }}></div>
                     {donation.status}
                   </div>
-                  <div className={`status-badge ${expired ? 'urgency-high' : 'urgency-low'}`}>
-                    {expired ? "Expired" : `Pickup Deadline: ${hours}h ${minutes}m`}
+                  <div style={{ fontSize: 13, fontWeight: 700, color: hours < 4 ? "var(--fc-danger)" : "var(--fc-primary-dark)", display: "flex", alignItems: "center", gap: 6 }}>
+                    <Clock size={14} />
+                    {expired ? "Expired" : `${hours}h ${minutes}m left`}
                   </div>
                 </div>
 

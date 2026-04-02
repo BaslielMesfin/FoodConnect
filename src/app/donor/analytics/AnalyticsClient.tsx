@@ -14,7 +14,7 @@ export default function AnalyticsClient({ donations }: { donations: any[] }) {
       d.setDate(d.getDate() - (13 - i));
       return {
         date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-        kg: Math.floor(Math.random() * 50) + 10, // Mocked growth for visual wow factor
+        kg: 0,
         meals: 0,
         realDate: d
       };

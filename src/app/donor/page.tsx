@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TrendingUp, Heart, Truck, Clock, AlertCircle, PackageX } from "lucide-react";
-import { getUrgencyLevel, getTimeRemaining } from "@/lib/utils";
+import { getUrgencyLevel, getTimeRemaining, getUrgencyColor } from "@/lib/utils";
 import AutoRefresh from "@/components/shared/AutoRefresh";
 import PageWrapper from "@/components/shared/PageWrapper";
 import EmptyState from "@/components/shared/EmptyState";
@@ -138,14 +138,15 @@ export default async function DonorDashboard() {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 20 }}>
           {activeDonations.map((donation: any) => {
-            const urgency = getUrgencyLevel(donation.expiresAt);
+            const urgencyColor = getUrgencyColor(donation.expiresAt);
             const { expired, hours, minutes } = getTimeRemaining(donation.expiresAt);
             
             return (
-              <div key={donation.id} className="fc-card" style={{ display: "flex", flexDirection: "column" }}>
+              <div key={donation.id} className="fc-card" style={{ display: "flex", flexDirection: "column", borderTop: `4px solid ${urgencyColor}` }}>
                 {/* Header: Urgency + Status */}
                 <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--fc-border-light)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div className={`status-badge urgency-${urgency === 'red' ? 'danger' : urgency === 'yellow' ? 'warning' : 'primary'}`}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: hours < 4 ? "var(--fc-danger)" : "var(--fc-text-secondary)", display: "flex", alignItems: "center", gap: 6 }}>
+                    <Clock size={14} />
                     {expired ? "Expired" : `Expires in ${hours}h ${minutes}m`}
                   </div>
                   <div className={`status-badge status-${donation.status.toLowerCase()}`}>
