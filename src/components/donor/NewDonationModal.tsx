@@ -167,6 +167,7 @@ export default function NewDonationModal() {
                 placeholder="0.0"
                 value={weightKg}
                 onChange={(e) => setWeightKg(e.target.value)}
+                onWheel={(e) => (e.target as HTMLInputElement).blur()}
                 required
               />
             </div>
