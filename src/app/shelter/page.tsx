@@ -52,19 +52,19 @@ export default async function ShelterDashboard() {
   return (
     <PageWrapper>
       <AutoRefresh intervalMs={15000} />
-      {/* Header */}
-      <div style={{ marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ marginBottom: 32, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }} className="animate-fade-in">
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--fc-primary)", marginBottom: 4 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--fc-primary)", marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 12, height: 2, background: "var(--fc-primary)" }} />
             Discovery Network
           </div>
-          <h1 style={{ fontSize: 28, fontFamily: "var(--fc-font-heading)" }}>
+          <h1 style={{ fontSize: 32, fontFamily: "var(--fc-font-heading)", fontWeight: 800, letterSpacing: "-0.03em" }}>
             Surplus Food Tracking
           </h1>
         </div>
-        <div style={{ padding: "8px 16px", background: "var(--fc-surface)", border: "1px solid var(--fc-border)", borderRadius: "var(--fc-radius-full)", fontSize: 13, display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ padding: "10px 20px", background: "var(--fc-surface)", border: "1px solid var(--fc-border)", borderRadius: "var(--fc-radius-full)", fontSize: 13, display: "flex", alignItems: "center", gap: 10, fontWeight: 700, boxShadow: "var(--fc-shadow-sm)" }}>
           <div style={{ width: 8, height: 8, background: "var(--fc-primary)", borderRadius: "50%", animation: "pulse 2s infinite" }}></div>
-          Live Feed
+          Live Network Active
         </div>
       </div>
 
@@ -90,10 +90,10 @@ export default async function ShelterDashboard() {
             overflow: "hidden"
           }}
         >
-          <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--fc-border-light)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--fc-bg)" }}>
-            <h2 style={{ fontSize: 16, fontFamily: "var(--fc-font-heading)", display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ padding: "18px 20px", borderBottom: "1px solid var(--fc-border-light)", display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--fc-bg)" }}>
+            <h2 style={{ fontSize: 15, fontFamily: "var(--fc-font-heading)", fontWeight: 800, display: "flex", alignItems: "center", gap: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>
               Available Today
-              <span style={{ fontSize: 12, padding: "2px 8px", background: "var(--fc-primary-light)", color: "var(--fc-primary)", borderRadius: "var(--fc-radius-full)" }}>{mappedDonations.length}</span>
+              <span style={{ fontSize: 12, padding: "2px 10px", background: "var(--fc-primary)", color: "white", borderRadius: "var(--fc-radius-full)", fontWeight: 700 }}>{mappedDonations.length}</span>
             </h2>
           </div>
           
@@ -110,26 +110,24 @@ export default async function ShelterDashboard() {
                 const { hours, minutes } = getTimeRemaining(donation.expiresAt);
 
                 return (
-                    <div key={donation.id} style={{ 
+                    <div key={donation.id} className="fc-card hover-lift" style={{ 
                       padding: 16, 
-                      border: "1px solid var(--fc-border)", 
-                      borderRadius: "var(--fc-radius-sm)", 
-                      background: "var(--fc-bg)",
+                      background: "white",
                       borderTop: `4px solid ${urgencyColor}`,
                       position: "relative",
                       overflow: "hidden"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-                        <h3 style={{ fontSize: 16, fontFamily: "var(--fc-font-body)", margin: 0 }}>{donation.foodDescription}</h3>
-                        <div style={{ fontSize: 12, fontWeight: 600, color: "var(--fc-text-secondary)", display: "flex", alignItems: "center", gap: 4 }}>
-                          <MapPin size={12} />
+                        <h3 style={{ fontSize: 15, fontWeight: 700, fontFamily: "var(--fc-font-heading)", margin: 0 }}>{donation.foodDescription}</h3>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--fc-text-secondary)", display: "flex", alignItems: "center", gap: 4 }}>
+                          <MapPin size={12} color="var(--fc-primary)" />
                           Est. 2km
                         </div>
                       </div>
                       
-                      <div style={{ display: "flex", gap: 16, fontSize: 13, color: "var(--fc-text-secondary)", marginBottom: 12 }}>
+                      <div style={{ display: "flex", gap: 16, fontSize: 12, color: "var(--fc-text-secondary)", marginBottom: 14 }}>
                         <div><strong>Weight:</strong> {donation.weightKg} KG</div>
-                        <div style={{ color: hours < 1 ? "var(--fc-danger)" : "inherit" }}>
+                        <div style={{ color: hours < 1 ? "var(--fc-danger)" : "inherit", fontWeight: hours < 1 ? 700 : 500 }}>
                           <strong>Expires:</strong> {hours}h {minutes}m
                         </div>
                       </div>

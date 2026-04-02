@@ -23,25 +23,28 @@ function StatCard({
   color: string;
 }) {
   return (
-    <div className="fc-card" style={{ padding: "24px" }}>
+    <div className="fc-card hover-lift hover-glow animate-fade-in" style={{ padding: "24px", borderTop: `4px solid ${color}` }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-        <span style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--fc-text-secondary)" }}>
+        <span style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--fc-text-secondary)" }}>
           {label}
         </span>
-        <Icon size={18} style={{ color }} />
+        <div style={{ width: 32, height: 32, borderRadius: "var(--fc-radius-sm)", background: `${color}15`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Icon size={18} style={{ color }} />
+        </div>
       </div>
       <div
         style={{
-          fontSize: 32,
+          fontSize: 36,
           fontWeight: 800,
           fontFamily: "var(--fc-font-heading)",
           color: "var(--fc-text)",
-          letterSpacing: "-0.02em",
+          letterSpacing: "-0.03em",
         }}
       >
         {value}
       </div>
-      <div style={{ fontSize: 13, color, fontWeight: 500, marginTop: 4 }}>
+      <div style={{ fontSize: 13, color: "var(--fc-text-secondary)", fontWeight: 500, marginTop: 4, display: "flex", alignItems: "center", gap: 4 }}>
+        <div style={{ width: 6, height: 6, borderRadius: "50%", background: color }} />
         {subtext}
       </div>
     </div>
@@ -70,12 +73,12 @@ export default async function DonorDashboard() {
   return (
     <PageWrapper>
       <AutoRefresh intervalMs={10000} />
-      {/* Header */}
-      <div style={{ marginBottom: 28 }}>
-        <div style={{ fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--fc-primary)", marginBottom: 4 }}>
+      <div style={{ marginBottom: 32 }} className="animate-fade-in">
+        <div style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--fc-primary)", marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ width: 12, height: 2, background: "var(--fc-primary)" }} />
           Live Operations
         </div>
-        <h1 style={{ fontSize: 28, fontFamily: "var(--fc-font-heading)" }}>
+        <h1 style={{ fontSize: 32, fontFamily: "var(--fc-font-heading)", fontWeight: 800, letterSpacing: "-0.03em" }}>
           Operational Insight
         </h1>
       </div>
@@ -119,10 +122,9 @@ export default async function DonorDashboard() {
         />
       </div>
 
-      {/* Active Pickup Queue */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-        <h2 style={{ fontSize: 20, fontFamily: "var(--fc-font-heading)", display: "flex", alignItems: "center", gap: 10 }}>
-          <Truck size={20} color="var(--fc-primary)" />
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }} className="animate-fade-in">
+        <h2 style={{ fontSize: 22, fontFamily: "var(--fc-font-heading)", fontWeight: 800, display: "flex", alignItems: "center", gap: 12, letterSpacing: "-0.02em" }}>
+          <Truck size={22} color="var(--fc-primary)" />
           Active Pickup Queue
         </h2>
       </div>

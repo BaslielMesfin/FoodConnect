@@ -79,16 +79,17 @@ export default function DashboardLayout({
       {/* ── Sidebar ── */}
       <aside
         style={{
-          width: 240,
-          background: "var(--fc-sidebar-bg)",
+          width: 260,
+          background: "linear-gradient(180deg, #0D0D0D 0%, #1A1A1A 100%)",
           display: "flex",
           flexDirection: "column",
           position: "fixed",
           top: 0,
           bottom: 0,
-          left: sidebarOpen ? 0 : -240,
+          left: sidebarOpen ? 0 : -260,
           zIndex: 50,
-          transition: "left 0.3s ease",
+          transition: "left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)",
+          borderRight: "1px solid rgba(255,255,255,0.05)",
         }}
         className="sidebar-desktop"
       >
@@ -101,33 +102,35 @@ export default function DashboardLayout({
             justifyContent: "space-between",
           }}
         >
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
             <div
               style={{
-                width: 32,
-                height: 32,
-                borderRadius: "var(--fc-radius-sm)",
-                background: "var(--fc-primary)",
+                width: 36,
+                height: 36,
+                borderRadius: "var(--fc-radius-md)",
+                background: "linear-gradient(135deg, var(--fc-primary) 0%, var(--fc-primary-dark) 100%)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                boxShadow: "0 0 15px rgba(0, 200, 83, 0.3)",
               }}
             >
-              <Heart size={16} color="white" fill="white" />
+              <Heart size={18} color="white" fill="white" />
             </div>
             <div>
               <div
                 style={{
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: 800,
                   fontFamily: "var(--fc-font-heading)",
                   color: "white",
+                  letterSpacing: "-0.02em",
                 }}
               >
                 Food
                 <span style={{ color: "var(--fc-primary)" }}>Connect</span>
               </div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 600 }}>
                 {roleLabel} Portal
               </div>
             </div>
@@ -160,31 +163,22 @@ export default function DashboardLayout({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 12,
-                  padding: "10px 12px",
-                  borderRadius: "var(--fc-radius-sm)",
-                  marginBottom: 2,
+                  gap: 14,
+                  padding: "12px 16px",
+                  borderRadius: "var(--fc-radius-md)",
+                  marginBottom: 6,
                   textDecoration: "none",
                   fontSize: 14,
-                  fontWeight: isActive ? 600 : 400,
+                  fontWeight: isActive ? 600 : 500,
                   color: isActive ? "white" : "rgba(255,255,255,0.5)",
-                  background: isActive ? "var(--fc-sidebar-hover)" : "transparent",
-                  transition: "all 0.15s ease",
+                  background: isActive ? "rgba(255,255,255,0.08)" : "transparent",
+                  transition: "all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                  border: `1px solid ${isActive ? "rgba(255,255,255,0.1)" : "transparent"}`,
                 }}
+                className="sidebar-link"
               >
-                <link.icon size={18} />
+                <link.icon size={20} color={isActive ? "var(--fc-primary)" : "currentColor"} />
                 {link.label}
-                {isActive && (
-                  <div
-                    style={{
-                      marginLeft: "auto",
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      background: "var(--fc-primary)",
-                    }}
-                  />
-                )}
               </Link>
             );
           })}
@@ -192,23 +186,24 @@ export default function DashboardLayout({
 
         {/* Schedule Pickup Button */}
         {!isShelter && (
-          <div style={{ padding: "0 12px 12px" }}>
+          <div style={{ padding: "0 16px 20px" }}>
             <Link
               href="/donor?new=true"
-              className="fc-btn-primary"
+              className="fc-btn-primary hover-glow"
               style={{
                 width: "100%",
                 textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 8,
-                fontSize: 13,
-                padding: "10px 16px",
-                borderRadius: "var(--fc-radius-full)",
+                gap: 10,
+                fontSize: 14,
+                padding: "12px 16px",
+                borderRadius: "var(--fc-radius-lg)",
+                boxShadow: "0 4px 15px rgba(0, 200, 83, 0.2)",
               }}
             >
-              <Package size={16} />
+              <Package size={18} />
               Schedule Pickup
             </Link>
           </div>
@@ -266,7 +261,7 @@ export default function DashboardLayout({
       <main
         style={{
           flex: 1,
-          marginLeft: 240,
+          marginLeft: 260,
           background: "var(--fc-bg)",
           minHeight: "100vh",
         }}
@@ -275,13 +270,17 @@ export default function DashboardLayout({
         {/* Top Bar */}
         <header
           style={{
-            height: 64,
-            padding: "0 24px",
+            height: 72,
+            padding: "0 32px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             borderBottom: "1px solid var(--fc-border-light)",
-            background: "var(--fc-surface)",
+            background: "rgba(255, 255, 255, 0.8)",
+            backdropFilter: "blur(12px)",
+            position: "sticky",
+            top: 0,
+            zIndex: 30,
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
