@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { getPageTitle } from "@/lib/utils";
 import {
   Heart,
   LayoutDashboard,
@@ -37,13 +39,27 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   const isShelter = pathname.startsWith("/shelter");
+  const isDonor = pathname.startsWith("/donor");
   const links = isShelter ? shelterLinks : donorLinks;
   const roleLabel = isShelter ? "Shelter" : "Donor";
+
+  // Basic Route Protection
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.role) {
+      const role = session.user.role;
+      if (role === "DONOR" && isShelter) {
+        router.push("/donor");
+      } else if (role === "SHELTER" && isDonor) {
+        router.push("/shelter");
+      }
+    }
+  }, [session, status, isShelter, isDonor, router]);
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
@@ -293,7 +309,7 @@ export default function DashboardLayout({
                 color: "var(--fc-text-secondary)",
               }}
             >
-              Kinetic Archive
+              {getPageTitle(pathname)}
             </h1>
           </div>
 

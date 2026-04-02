@@ -53,3 +53,23 @@ export function formatWeight(kg: number): string {
   if (kg >= 1000) return `${(kg / 1000).toFixed(1)} tons`;
   return `${kg} kg`;
 }
+
+export function getPageTitle(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) return "Dashboard";
+  
+  const lastSegment = segments[segments.length - 1];
+  
+  const titles: Record<string, string> = {
+    donor: "Donor Dashboard",
+    shelter: "Shelter Dashboard",
+    analytics: "Impact Analytics",
+    history: "Activity History",
+    dispatch: "Active Dispatch",
+    partners: "Partner Network",
+    settings: "Account Settings",
+  };
+
+  return titles[lastSegment] || lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+}
+

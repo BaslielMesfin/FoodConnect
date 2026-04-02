@@ -46,6 +46,7 @@ export async function createDonation(formData: FormData) {
     revalidatePath("/donor");
     revalidatePath("/shelter"); // Revalidate shelter side so they see it immediately
 
+    console.log(`[Donation Created] ID: ${donation.id} by Donor: ${session.user.id}`);
     return { success: true, donationId: donation.id };
   } catch (error) {
     console.error("Failed to create donation:", error);
@@ -130,6 +131,7 @@ export async function claimDonation(donationId: string) {
     revalidatePath("/shelter");
     revalidatePath("/shelter/dispatch");
 
+    console.log(`[Donation Claimed] ID: ${donationId} by Shelter: ${session.user.id}`);
     return { success: true };
   } catch (error) {
     console.error("Failed to claim donation:", error);
